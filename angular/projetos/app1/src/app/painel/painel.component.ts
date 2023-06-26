@@ -15,12 +15,14 @@ export class PainelComponent {
   public resposta: string = ''
 
   public rodada: number = 0
-  public rodadaFrase: Frase
+  public rodadaFrase!: Frase
 
   public progresso: number = 0
 
+  public tentativas: number = 3
+
   constructor() {
-    this.rodadaFrase =  this.frases[this.rodada]
+    this.atualizaRodada()
   }
 
   public atualizaResposta(resposta: Event): void{
@@ -28,7 +30,6 @@ export class PainelComponent {
   }
 
   public verificarResposta(): void{
-    
     if(this.rodadaFrase.frasePtBr == this.resposta){
    
           //trocar pergunta da rodada
@@ -39,12 +40,24 @@ export class PainelComponent {
       console.log(this.progresso)
 
       //atualiza o objeto rodada
-        this.rodadaFrase = this.frases[this.rodada]
+       this.atualizaRodada()
 
 
     } else {
       alert('A tradução está errada')
+      //diminuir a varivavel tentativas
+      this.tentativas--
+
+      if(this.tentativas === -1){
+        alert('Você perdeu todas tentativas')
+      }
     }
+  }
+
+  public atualizaRodada(): void{
+    this.rodadaFrase =  this.frases[this.rodada]
+    //limpar rodada
+    this.resposta = ''
   }
 
 }
