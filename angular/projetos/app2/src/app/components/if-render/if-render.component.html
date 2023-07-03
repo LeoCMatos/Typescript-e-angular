@@ -1,1 +1,8 @@
-<p>if-render works!</p>
+<div *ngIf="apagar; else aparecerdiv">
+    <p>Aqui é a divisoria 1</p>
+</div>
+<ng-template #aparecerdiv>
+    <div>
+        <p>aqui é a divisoria 2 que so aparece quando a 1 some</p>
+    </div>
+</ng-template>
